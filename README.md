@@ -73,26 +73,39 @@ L'évaluation du modèle doit impérativement se faire sur le F1-Score, car l'ex
   - CASH_OUT
 Les types PAYMENT et DEBIT présentent un taux de fraude négligeable ou nul.
 
-###### Analyse Temporelle (step)
-En utilisant l'indice crucial que Step 1 est la première heure d'un LUNDI, nous avons créé deux nouvelles caractéristiques (features) :
-- hour (Heure de la journée) : L'analyse du taux de fraude par heure révèle que les transactions frauduleuses ne sont pas uniformes. Elles sont souvent concentrées sur des plages spécifiques, notamment les heures nocturnes (confirmant l'indice sur les "vols de comptes nocturnes" ) ou en dehors des heures de bureau.
-- day_of_week (Jour de la semaine) : Le taux de fraude présente des variations importantes selon le jour, ce qui peut indiquer des schémas d'attaque spécifiques à la semaine ou au week-end.
 
-###### Préparation des Données pour la Modélisation
-Le jeu de données a été préparé comme suit :
-- Suppression des identifiants (transaction_id, customer_id) et de la variable source (step).
-- Feature Engineering : Ajout des variables hour et day_of_week.
-- Encodage Catégoriel : Application du One-Hot Encoding aux variables type, hour et day_of_week pour les rendre utilisables par la Régression Logistique.
 
-#### Baseline
-La Régression Logistique a servi de modèle de référence (Baseline) pour la détection de fraude. Les résultats sont généralement révélateurs de la complexité et du déséquilibre du problème.
 
-###### Performance Globale (F1-Score)
-Le F1-Score obtenu sur l'ensemble de validation est votre mesure de référence.
-- F1-Score : [Insérer le F1-Score réel ici] (par exemple, 0.7250)
-Ce score fournit une première évaluation de l'équilibre entre la précision (éviter les faux positifs) et le rappel (éviter les faux négatifs). Tout modèle avancé (comme XGBoost) devra atteindre un F1-Score supérieur à cette valeur.
+1. Pré-traitement Spécifique (Feature Engineering)
+Le cœur du pré-traitement réside dans l'exploitation de la variable temporelle step (nombre d'heures totales) :
+•	Caractéristiques Temporelles Cycliques : La colonne step est transformée en deux variables plus pertinentes :
+o	hour_of_day ( step  (mod 24) ) : L'heure spécifique à laquelle la transaction a eu lieu (0 à 23).
+o	day_of_week ( ([ step / 24 ])  (mod 7) ) : Le jour de la semaine (0=Lundi à 6=Dimanche).
+o	Importance : Cette transformation introduit une information comportementale essentielle, car la fraude suit souvent des schémas temporels (ex: nuit, week-end).
+•	Nettoyage : Les colonnes customer_id (trop de valeurs uniques) et transaction_id (simple identifiant) sont exclues du modèle d'entraînement.
 
-La Régression Logistique, en tant que modèle simple et linéaire, a probablement du mal à capturer la complexité des schémas de fraude dans un environnement déséquilibré. Elle parvient à identifier les cas de fraude les plus "évidents" mais échoue à détecter les cas subtils, comme en témoigne le nombre significatif de Faux Négatifs (FN).
+##### 2. Choix du Préprocesseur (Pipeline ColumnTransformer)
+Un ColumnTransformer est utilisé pour appliquer des transformations différentes aux types de variables :
+•	Caractéristiques Numériques (step, amount, age, hour_of_day, day_of_week) : Application d'un StandardScaler pour centrer et réduire les données. Cela est nécessaire, surtout pour la Régression Logistique, afin que les différentes échelles de valeurs (ex: amount vs day_of_week) ne biaisent pas le modèle.
+•	Caractéristiques Catégorielles (type) : Application d'un OneHotEncoder pour transformer les catégories (ex: 'CASH_OUT', 'TRANSFER') en variables binaires numériques, utilisables par le modèle.
+3. Choix des Modèles
+Deux modèles sont comparés dans une stratégie de baseline vs. modèle avancé :
+1.	Baseline : LogisticRegression (Régression Logistique). C'est un modèle linéaire simple, rapide à entraîner et souvent utilisé comme point de référence minimal.
+2.	Modèle Avancé : RandomForestClassifier (Forêt Aléatoire). C'est un modèle ensembliste non linéaire, robuste, et généralement plus performant pour capturer les relations complexes dans les données.
+•	Stratégie Anti-Déséquilibre : Les deux modèles utilisent class_weight='balanced'. Ceci ajuste implicitement les poids des classes pendant l'entraînement, donnant un poids plus important aux rares transactions frauduleuses pour éviter qu'elles ne soient ignorées.
+4. Stratégie de Validation
+•	Séparation des Données : Le jeu d'entraînement complet (X, y) est divisé en 80% Entraînement (X_train) et 20% Validation (X_val) en utilisant train_test_split.
+•	Stratification : L'argument stratify=y est utilisé. Cela garantit que la proportion de fraudes (classe 1) dans le jeu de validation est la même que dans le jeu d'entraînement, ce qui est crucial dans un contexte de déséquilibre.
+•	Métrique d'Évaluation : Le F1-Score est la métrique principale pour comparer les modèles.
+o	Le F1-Score est la moyenne harmonique de la Précision (des fraudes prédites, quelle proportion est réelle ?) et du Rappel (des fraudes réelles, quelle proportion est détectée ?). Il est préférable à la simple précision pour les jeux de données déséquilibrés.
 
+1.	Baseline : LogisticRegression (Régression Logistique). C'est un modèle linéaire simple, rapide à entraîner et souvent utilisé comme point de référence minimal.
+2.	Modèle Avancé : RandomForestClassifier (Forêt Aléatoire). C'est un modèle ensembliste non linéaire, robuste, et généralement plus performant pour capturer les relations complexes dans les données.
+•	Stratégie Anti-Déséquilibre : Les deux modèles utilisent class_weight='balanced'. Ceci ajuste implicitement les poids des classes pendant l'entraînement, donnant un poids plus important aux rares transactions frauduleuses pour éviter qu'elles ne soient ignorées.
+4. Stratégie de Validation
+•	Séparation des Données : Le jeu d'entraînement complet (X, y) est divisé en 80% Entraînement (X_train) et 20% Validation (X_val) en utilisant train_test_split.
+•	Stratification : L'argument stratify=y est utilisé. Cela garantit que la proportion de fraudes (classe 1) dans le jeu de validation est la même que dans le jeu d'entraînement, ce qui est crucial dans un contexte de déséquilibre.
+•	Métrique d'Évaluation : Le F1-Score est la métrique principale pour comparer les modèles.
+o	Le F1-Score est la moyenne harmonique de la Précision (des fraudes prédites, quelle proportion est réelle ?) et du Rappel (des fraudes réelles, quelle proportion est détectée ?). Il est préférable à la simple précision pour les jeux de données déséquilibrés.
 
 

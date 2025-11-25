@@ -8,21 +8,21 @@
 * prénom(s) : Rita Harenah
 * classe : ESIIA 5
 * numéro : 05
-* rôle : *(développeur, analyste, présentateur, ...)*
+* rôle : *Préparation du slide*
 
 #### Membre 2 : 
 * nom : RAKOTONOELINA 
 * prénom(s) : Lala Minoniaina Joannah
 * classe : ESIIA 5
 * numéro : 09
-* rôle : *(développeur, analyste, présentateur, ...)*
+* rôle : *Conception du Readme.md*
 
 #### Membre 3 : 
 * nom : RAKOTONJANAHARY
 * prénom(s) : Miora Irinah
 * classe : ESIIA 5
 * numéro : 10
-* rôle : *(développeur, analyste, présentateur, ...)*
+* rôle : *Préparation slide*
 
 #### Membre 4 : 
 * nom : RATOVONARIVO
@@ -36,7 +36,7 @@
 * prénom(s) : Alan Steven
 * classe : ESIIA 5
 * numéro : 16
-* rôle : *(développeur, analyste, présentateur, ...)*
+* rôle : *Analyse de données*
 
 #### Membre 6 : 
 * nom : RATIA ANDRIAFITAHIANA

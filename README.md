@@ -1,6 +1,6 @@
-# PoketraFinday
-
 # **Rapport de Projet \- PoketraFinday**
+## **Examen Final Machine Learning & Data Science**
+Réalisé au sein de ISPM - Madagascar (www.ispm-edu.com)
 
 ### **1\. Informations sur le Groupe**
 #### Membre 1 : 
@@ -79,11 +79,11 @@ Un ColumnTransformer est utilisé pour appliquer des transformations différente
 Deux modèles sont comparés dans une stratégie de baseline vs. modèle avancé :
 - Baseline : LogisticRegression (Régression Logistique). C'est un modèle linéaire simple, rapide à entraîner et souvent utilisé comme point de référence minimal.
 - Modèle Avancé : RandomForestClassifier (Forêt Aléatoire). C'est un modèle ensembliste non linéaire, robuste, et généralement plus performant pour capturer les relations complexes dans les données.
-•	Stratégie Anti-Déséquilibre : Les deux modèles utilisent class_weight='balanced'. Ceci ajuste implicitement les poids des classes pendant l'entraînement, donnant un poids plus important aux rares transactions frauduleuses pour éviter qu'elles ne soient ignorées.
+- Stratégie Anti-Déséquilibre : Les deux modèles utilisent class_weight='balanced'. Ceci ajuste implicitement les poids des classes pendant l'entraînement, donnant un poids plus important aux rares transactions frauduleuses pour éviter qu'elles ne soient ignorées.
 
 ##### 4. Stratégie de Validation
 - Séparation des Données : Le jeu d'entraînement complet (X, y) est divisé en 80% Entraînement (X_train) et 20% Validation (X_val) en utilisant train_test_split.
 - Stratification : L'argument stratify=y est utilisé. Cela garantit que la proportion de fraudes (classe 1) dans le jeu de validation est la même que dans le jeu d'entraînement, ce qui est crucial dans un contexte de déséquilibre.
 -	Métrique d'Évaluation : Le F1-Score est la métrique principale pour comparer les modèles.
-o	Le F1-Score est la moyenne harmonique de la Précision (des fraudes prédites, quelle proportion est réelle ?) et du Rappel (des fraudes réelles, quelle proportion est détectée ?). Il est préférable à la simple précision pour les jeux de données déséquilibrés.
+- Le F1-Score est la moyenne harmonique de la Précision (des fraudes prédites, quelle proportion est réelle ?) et du Rappel (des fraudes réelles, quelle proportion est détectée ?). Il est préférable à la simple précision pour les jeux de données déséquilibrés.
 

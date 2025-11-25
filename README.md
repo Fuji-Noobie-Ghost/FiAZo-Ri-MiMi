@@ -55,5 +55,7 @@ Il est critique de résoudre ce problème pour les raisons suivantes :
 - Confiance et Réputation (Mission Critique);
 - Impact Opérationnel et Développement 
 
-Méthodologie Adoptée :
-EDA
+# **Méthodologie Adoptée :**
+## **EDA et Préparation Initiale ** 
+Constats sur la Cible et le Déséquilibre
+Déséquilibre Extrême : Le jeu de données présente un déséquilibre de classe extrême1. Le pourcentage de transactions frauduleuses ($is\_fraud = 1$) est très faible (typiquement moins de 0,2 % du total).Métrique Cible : En raison de ce déséquilibre, la métrique principale pour l'évaluation ne doit pas être l'exactitude (Accuracy), mais le F1-Score2. Le F1-Score est critique pour s'assurer que le modèle détecte effectivement les fraudes sans générer un nombre inacceptable de faux positifs (utilisateurs honnêtes bloqués)3.2. Variables Cléstype de Transaction : C'est la variable la plus discriminante.La fraude est presque exclusivement concentrée sur les transactions de type TRANSFER et CASH_OUT.Les transactions PAYMENT et DEBIT sont très rarement (voire jamais) frauduleuses.amount (Montant) : Les montants frauduleux montrent une distribution différente des montants légitimes, souvent avec des montants plus élevés et des schémas qui pourraient nécessiter une analyse plus poussée (montants ronds, montants maximaux).

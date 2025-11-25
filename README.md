@@ -96,8 +96,8 @@ Deux modèles sont comparés dans une stratégie de baseline vs. modèle avancé
 **LIEN VERS LA VIDÉO DE PRÉSENTATION**
 
 ### **4\. Réponses aux Questions d'Analyse**
-* https://drive.google.com/file/d/17Bvs_vA37mbEinJZcOHsJjAJmHb1N8NA/view?usp=drivesdk
-lv_0_20251125161602.mp4 *
+* https://drive.google.com/file/d/1Basmm72ExRONy5lJPT_XXlcL1uSKkS9t/view?usp=drivesdk
+lv_0_20251125162706.mp4 *
 
 **Q1. Pourquoi on utilise F1-Score au lieu de accuracy ?**
 

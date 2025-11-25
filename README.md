@@ -116,14 +116,14 @@ Les deux nouvelles variables créées à partir de la colonne step sont les plus
 
 **Q4. Enoncez tous les types de fraudes que vous avez décelé lors de votre analyse**
 
-* ###### TRANSACTION *
-* - PAIEMENT*
-* - PAIEMENT*
-* - CASH_OUT*
-* - DEBIT*
-* ###### STEP *
-* - JOUR*
-* - HEURE*
+* ###### TRANSACTION 
+* PAIEMENT*
+* PAIEMENT*
+* CASH_OUT*
+* DEBIT*
+* ###### STEP 
+* JOUR*
+* HEURE*
 
 **Q5. Selon vous, quelle décision prendre si une transaction *en cours* est détectée comme *fraude* par le modèle ?**
 *La décision prise pour une transaction en cours détectée comme fraude dépend du seuil de risque et du type de transaction, mais la stratégie générale est la suivante :

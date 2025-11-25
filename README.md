@@ -8,7 +8,7 @@
 * prénom(s) : Rita Harenah
 * classe : ESIIA 5
 * numéro : 05
-* rôle : *Préparation du slide*
+* rôle : *Préparation de la présentation*
 
 #### Membre 2 : 
 * nom : RAKOTONOELINA 
@@ -29,21 +29,21 @@
 * prénom(s) : Zo Michaël 
 * classe : ESIIA 5
 * numéro : 15
-* rôle : *(développeur, analyste, présentateur, ...)*
+* rôle : *Développeur*
 
 #### Membre 5 : 
 * nom : ANDRIAMIHAJA
 * prénom(s) : Alan Steven
 * classe : ESIIA 5
 * numéro : 16
-* rôle : *Analyse de données*
+* rôle : *Analyste*
 
 #### Membre 6 : 
 * nom : RATIA ANDRIAFITAHIANA
 * prénom(s) : Joseph Tellia
 * classe : ESIIA 5
 * numéro : 19
-* rôle : *(développeur, analyste, présentateur, ...)*
+* rôle : *Développeur*
 
 ### **2\. Résumé du Travail**
 

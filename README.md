@@ -94,3 +94,5 @@ Ce score fournit une première évaluation de l'équilibre entre la précision (
 
 La Régression Logistique, en tant que modèle simple et linéaire, a probablement du mal à capturer la complexité des schémas de fraude dans un environnement déséquilibré. Elle parvient à identifier les cas de fraude les plus "évidents" mais échoue à détecter les cas subtils, comme en témoigne le nombre significatif de Faux Négatifs (FN).
 
+
+

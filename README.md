@@ -47,7 +47,7 @@ Réalisé au sein de ISPM - Madagascar (www.ispm-edu.com)
 
 ### **2\. Résumé du Travail**
 
-Problématique :  
+**Problématique** :  
 Le problème de sécurité détecté chez PoketraFinday est une recrudescence de fraudes qui menacent la plateforme.
 Le cœur du problème réside dans l'augmentation d'attaques plus ou moins sophistiquées, incluant :
 Des vols de comptes nocturnes, de l'ingénierie sociale ciblant les seniors.

@@ -174,5 +174,5 @@ submission = pd.DataFrame({
 })
 submission.to_csv("submission.csv", index=False)
 
-print("✅ Succès ! Le fichier 'submission.csv' a été généré.")
+print(" Succès ! Le fichier 'submission.csv' a été généré.")
 print(submission.head())

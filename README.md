@@ -93,6 +93,7 @@ Deux modèles sont comparés dans une stratégie de baseline vs. modèle avancé
 -	Concentration des Fraudes : Contrairement aux attentes typiques (où CASH_OUT et TRANSFER dominent), ici, la majorité écrasante des fraudes provient des TRANSFER (527 cas). Les autres types (PAYMENT, CASH_OUT, DEBIT) sont nettement moins fréquents.
 - Interprétation : Les fraudeurs exploitent principalement le mécanisme de transfert pour sortir l'argent ou le blanchir dans ce jeu de données particulier.
 
+* [**LIEN VERS LA VIDÉO DE PRÉSENTATION**]
 
 ### **4\. Réponses aux Questions d'Analyse**
 

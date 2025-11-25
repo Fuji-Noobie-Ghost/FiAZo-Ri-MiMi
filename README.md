@@ -62,50 +62,28 @@ Il est critique de résoudre ce problème pour les raisons suivantes :
 - Aucune valeur manquante (NaN) n'a été détectée dans les colonnes fournies.
 - Les colonnes transaction_id et customer_id ont été identifiées comme des identifiants non prédictifs et ont été mises de côté/supprimées pour la modélisation.
 
-###### Analyse de la Cible (is_fraud)
-- Déséquilibre Extrême : Nous avons confirmé un déséquilibre de classe extrême (Imbalanced Data). Le pourcentage de transactions frauduleuses (is_fraud = 1) est très faible (généralement moins de 0.2% du total).
-L'évaluation du modèle doit impérativement se faire sur le F1-Score, car l'exactitude (Accuracy) serait trompeuse.
-
-###### Analyse des Variables Catégorielles (type)
-- Variables Clés : La variable type est l'un des prédicteurs les plus puissants.
-- Concentration de la Fraude : La fraude est quasi-exclusivement concentrée sur deux types de transactions:
-  - TRANSFER
-  - CASH_OUT
-Les types PAYMENT et DEBIT présentent un taux de fraude négligeable ou nul.
-
-
-
-
-1. Pré-traitement Spécifique (Feature Engineering)
+##### 1. Pré-traitement Spécifique (Feature Engineering)
 Le cœur du pré-traitement réside dans l'exploitation de la variable temporelle step (nombre d'heures totales) :
-•	Caractéristiques Temporelles Cycliques : La colonne step est transformée en deux variables plus pertinentes :
-o	hour_of_day ( step  (mod 24) ) : L'heure spécifique à laquelle la transaction a eu lieu (0 à 23).
-o	day_of_week ( ([ step / 24 ])  (mod 7) ) : Le jour de la semaine (0=Lundi à 6=Dimanche).
-o	Importance : Cette transformation introduit une information comportementale essentielle, car la fraude suit souvent des schémas temporels (ex: nuit, week-end).
-•	Nettoyage : Les colonnes customer_id (trop de valeurs uniques) et transaction_id (simple identifiant) sont exclues du modèle d'entraînement.
+- Caractéristiques Temporelles Cycliques : La colonne step est transformée en deux variables plus pertinentes :
+  - hour_of_day ( step  (mod 24) ) : L'heure spécifique à laquelle la transaction a eu lieu (0 à 23).
+  - day_of_week ( ([ step / 24 ])  (mod 7) ) : Le jour de la semaine (0=Lundi à 6=Dimanche).
+  - Importance : Cette transformation introduit une information comportementale essentielle, car la fraude suit souvent des schémas temporels (ex: nuit, week-end).
+- Nettoyage : Les colonnes customer_id (trop de valeurs uniques) et transaction_id (simple identifiant) sont exclues du modèle d'entraînement.
 
 ##### 2. Choix du Préprocesseur (Pipeline ColumnTransformer)
 Un ColumnTransformer est utilisé pour appliquer des transformations différentes aux types de variables :
-•	Caractéristiques Numériques (step, amount, age, hour_of_day, day_of_week) : Application d'un StandardScaler pour centrer et réduire les données. Cela est nécessaire, surtout pour la Régression Logistique, afin que les différentes échelles de valeurs (ex: amount vs day_of_week) ne biaisent pas le modèle.
-•	Caractéristiques Catégorielles (type) : Application d'un OneHotEncoder pour transformer les catégories (ex: 'CASH_OUT', 'TRANSFER') en variables binaires numériques, utilisables par le modèle.
-3. Choix des Modèles
+- Caractéristiques Numériques (step, amount, age, hour_of_day, day_of_week) : Application d'un StandardScaler pour centrer et réduire les données. Cela est nécessaire, surtout pour la Régression Logistique, afin que les différentes échelles de valeurs (ex: amount vs day_of_week) ne biaisent pas le modèle.
+- Caractéristiques Catégorielles (type) : Application d'un OneHotEncoder pour transformer les catégories (ex: 'CASH_OUT', 'TRANSFER') en variables binaires numériques, utilisables par le modèle.
+  
+##### 3. Choix des Modèles
 Deux modèles sont comparés dans une stratégie de baseline vs. modèle avancé :
-1.	Baseline : LogisticRegression (Régression Logistique). C'est un modèle linéaire simple, rapide à entraîner et souvent utilisé comme point de référence minimal.
-2.	Modèle Avancé : RandomForestClassifier (Forêt Aléatoire). C'est un modèle ensembliste non linéaire, robuste, et généralement plus performant pour capturer les relations complexes dans les données.
+- Baseline : LogisticRegression (Régression Logistique). C'est un modèle linéaire simple, rapide à entraîner et souvent utilisé comme point de référence minimal.
+- Modèle Avancé : RandomForestClassifier (Forêt Aléatoire). C'est un modèle ensembliste non linéaire, robuste, et généralement plus performant pour capturer les relations complexes dans les données.
 •	Stratégie Anti-Déséquilibre : Les deux modèles utilisent class_weight='balanced'. Ceci ajuste implicitement les poids des classes pendant l'entraînement, donnant un poids plus important aux rares transactions frauduleuses pour éviter qu'elles ne soient ignorées.
-4. Stratégie de Validation
-•	Séparation des Données : Le jeu d'entraînement complet (X, y) est divisé en 80% Entraînement (X_train) et 20% Validation (X_val) en utilisant train_test_split.
-•	Stratification : L'argument stratify=y est utilisé. Cela garantit que la proportion de fraudes (classe 1) dans le jeu de validation est la même que dans le jeu d'entraînement, ce qui est crucial dans un contexte de déséquilibre.
-•	Métrique d'Évaluation : Le F1-Score est la métrique principale pour comparer les modèles.
-o	Le F1-Score est la moyenne harmonique de la Précision (des fraudes prédites, quelle proportion est réelle ?) et du Rappel (des fraudes réelles, quelle proportion est détectée ?). Il est préférable à la simple précision pour les jeux de données déséquilibrés.
 
-1.	Baseline : LogisticRegression (Régression Logistique). C'est un modèle linéaire simple, rapide à entraîner et souvent utilisé comme point de référence minimal.
-2.	Modèle Avancé : RandomForestClassifier (Forêt Aléatoire). C'est un modèle ensembliste non linéaire, robuste, et généralement plus performant pour capturer les relations complexes dans les données.
-•	Stratégie Anti-Déséquilibre : Les deux modèles utilisent class_weight='balanced'. Ceci ajuste implicitement les poids des classes pendant l'entraînement, donnant un poids plus important aux rares transactions frauduleuses pour éviter qu'elles ne soient ignorées.
-4. Stratégie de Validation
-•	Séparation des Données : Le jeu d'entraînement complet (X, y) est divisé en 80% Entraînement (X_train) et 20% Validation (X_val) en utilisant train_test_split.
-•	Stratification : L'argument stratify=y est utilisé. Cela garantit que la proportion de fraudes (classe 1) dans le jeu de validation est la même que dans le jeu d'entraînement, ce qui est crucial dans un contexte de déséquilibre.
-•	Métrique d'Évaluation : Le F1-Score est la métrique principale pour comparer les modèles.
+##### 4. Stratégie de Validation
+- Séparation des Données : Le jeu d'entraînement complet (X, y) est divisé en 80% Entraînement (X_train) et 20% Validation (X_val) en utilisant train_test_split.
+- Stratification : L'argument stratify=y est utilisé. Cela garantit que la proportion de fraudes (classe 1) dans le jeu de validation est la même que dans le jeu d'entraînement, ce qui est crucial dans un contexte de déséquilibre.
+-	Métrique d'Évaluation : Le F1-Score est la métrique principale pour comparer les modèles.
 o	Le F1-Score est la moyenne harmonique de la Précision (des fraudes prédites, quelle proportion est réelle ?) et du Rappel (des fraudes réelles, quelle proportion est détectée ?). Il est préférable à la simple précision pour les jeux de données déséquilibrés.
-
 

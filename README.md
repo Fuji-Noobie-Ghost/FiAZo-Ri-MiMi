@@ -87,3 +87,9 @@ Deux modèles sont comparés dans une stratégie de baseline vs. modèle avancé
 -	Métrique d'Évaluation : Le F1-Score est la métrique principale pour comparer les modèles.
 - Le F1-Score est la moyenne harmonique de la Précision (des fraudes prédites, quelle proportion est réelle ?) et du Rappel (des fraudes réelles, quelle proportion est détectée ?). Il est préférable à la simple précision pour les jeux de données déséquilibrés.
 
+
+### Résultats Obtenus
+-	Déséquilibre de Classe Extrême : Le Taux de fraude est très faible, s'élevant à 1.9833\%. Sur l'échantillon de validation (support), seules 119 transactions sur 6000 sont des fraudes (classe 1). Ce déséquilibre est la principale difficulté à surmonter.
+-	Concentration des Fraudes : Contrairement aux attentes typiques (où CASH_OUT et TRANSFER dominent), ici, la majorité écrasante des fraudes provient des TRANSFER (527 cas). Les autres types (PAYMENT, CASH_OUT, DEBIT) sont nettement moins fréquents.
+- Interprétation : Les fraudeurs exploitent principalement le mécanisme de transfert pour sortir l'argent ou le blanchir dans ce jeu de données particulier.
+

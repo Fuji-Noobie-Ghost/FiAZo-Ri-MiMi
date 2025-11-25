@@ -99,25 +99,33 @@ Deux modèles sont comparés dans une stratégie de baseline vs. modèle avancé
 **Q1. Pourquoi on utilise F1-Score au lieu de accuracy ?**
 
 *On utilise le F1-Score au lieu de l'Exactitude (Accuracy), dans des problèmes comme la détection de fraude, à cause du déséquilibre de classe. Dans notre jeu de données, le taux de fraude (classe positive, '1') est de 1.9833%. Cela signifie que la classe négative (non-fraude, '0') représente 98.0167% des données.
-Accuracy est trompeuse et ne détecte aucune fraude.*
+Accuracy est trompeuse et ne détecte aucune fraude. Le F1-Score est conçu pour être une métrique plus robuste en cas de déséquilibre. Il s'agit de la moyenne harmonique de la Précision et du Rappel (Recall).*
 
 **Q2. Qu'est ce qui est plus grave ici, les Faux Positifs ou les Faux Négatifs ?**
 
-*(Votre réponse ici)*
+*Il est généralement considéré que les Faux Négatifs sont plus graves que les Faux Positifs
+- Les Faux Négatifs représentent le risque financier principal et le coût le plus critique en détection de fraude. C'est pourquoi le Rappel (Recall), qui mesure la capacité à éviter les Faux Négatifs, est souvent la métrique la plus surveillée, quitte à sacrifier légèrement la Précision.
+- Les Faux Positifs représentent le coût opérationnel et le risque d'insatisfaction client. C'est pourquoi la Précision (Precision) est également vitale.*
 
 **Q3. Stratégie de Modélisation : Quelles nouvelles variables (Feature Engineering) ont le plus amélioré votre modèle par rapport à la Baseline ?**
 
-*(Votre réponse ici)*
+*La stratégie de modélisation a impliqué l'ajout de nouvelles variables temporelles qui sont celles qui ont le plus amélioré la performance du modèle, notamment la Forêt Aléatoire (Random Forest).
+Les deux nouvelles variables créées à partir de la colonne step sont les plus importantes :
+- hour_of_day (Heure de la journée, de 0 à 23)
+- day_of_week (Jour de la semaine, de 0=Lundi à 6=Dimanche)*
 
 **Q4. Enoncez tous les types de fraudes que vous avez décelé lors de votre analyse**
 
-* *(fraude1)*
-* *(fraude2)*
-* *(fraude3)*
-* *(...)*
+* *TRANSFERT*
+* *PAIEMENT*
+* *CASH_OUT*
+* *DEBIT*
 
 **Q5. Selon vous, quelle décision prendre si une transaction *en cours* est détectée comme *fraude* par le modèle ?**
-*(votre réponse ici)*
+*La décision prise pour une transaction en cours détectée comme fraude dépend du seuil de risque et du type de transaction, mais la stratégie générale est la suivante :
+Bloquer la transaction; 
+Mise en attente.*
 
 ### **5\. Bibliographie**
-*(si vous avez des livres, liens ou articles qui vous ont servi dans ce travail)*
+*- https://gemini.google.com/
+- https://scickit-learn.com*

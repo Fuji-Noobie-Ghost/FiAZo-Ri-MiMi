@@ -56,7 +56,7 @@ Il est critique de résoudre ce problème pour les raisons suivantes :
 - Impact Opérationnel et Développement 
 
 ### **Méthodologie Adoptée :**
-#### **EDA et Préparation Initiale ** 
+#### EDA et Préparation Initiale 
 ###### Structure du Dataset
 - Le jeu de données d'entraînement est volumineux, avec plusieurs millions d'observations et 7 colonnes initiales.
 - Aucune valeur manquante (NaN) n'a été détectée dans les colonnes fournies.

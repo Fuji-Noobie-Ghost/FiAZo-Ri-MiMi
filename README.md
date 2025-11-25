@@ -44,3 +44,16 @@
 * classe : ESIIA 5
 * numéro : 19
 * rôle : *(développeur, analyste, présentateur, ...)*
+
+### **2\. Résumé du Travail**
+
+Problématique :  
+Le problème de sécurité détecté chez PoketraFinday est une recrudescence de fraudes qui menacent la plateforme.
+Le cœur du problème réside dans l'augmentation d'attaques plus ou moins sophistiquées, incluant :
+Des vols de comptes nocturnes, de l'ingénierie sociale ciblant les seniors.
+Il est critique de résoudre ce problème pour les raisons suivantes :
+- Confiance et Réputation (Mission Critique);
+- Impact Opérationnel et Développement 
+
+Méthodologie Adoptée :
+EDA

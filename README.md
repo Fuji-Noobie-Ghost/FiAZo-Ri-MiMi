@@ -57,10 +57,29 @@ Il est critique de résoudre ce problème pour les raisons suivantes :
 
 ### **Méthodologie Adoptée :**
 #### **EDA et Préparation Initiale ** 
-#### **Constats sur la Cible et le Déséquilibre**
-##### **Déséquilibre Extrême : ** 
-Le jeu de données présente un déséquilibre de classe extrême
-- Le pourcentage de transactions frauduleuses ($is\_fraud = 1$) est très faible (typiquement moins de 0,2 % du total).
-- Métrique Cible : En raison de ce déséquilibre, la métrique principale pour l'évaluation ne doit pas être l'exactitude (Accuracy), mais le F1-Score2.
+###### Structure du Dataset
+- Le jeu de données d'entraînement est volumineux, avec plusieurs millions d'observations et 7 colonnes initiales.
+- Aucune valeur manquante (NaN) n'a été détectée dans les colonnes fournies.
+- Les colonnes transaction_id et customer_id ont été identifiées comme des identifiants non prédictifs et ont été mises de côté/supprimées pour la modélisation.
 
-Le F1-Score est critique pour s'assurer que le modèle détecte effectivement les fraudes sans générer un nombre inacceptable de faux positifs (utilisateurs honnêtes bloqués)3.2. Variables Cléstype de Transaction : C'est la variable la plus discriminante.La fraude est presque exclusivement concentrée sur les transactions de type TRANSFER et CASH_OUT.Les transactions PAYMENT et DEBIT sont très rarement (voire jamais) frauduleuses.amount (Montant) : Les montants frauduleux montrent une distribution différente des montants légitimes, souvent avec des montants plus élevés et des schémas qui pourraient nécessiter une analyse plus poussée (montants ronds, montants maximaux).
+###### Analyse de la Cible (is_fraud)
+- Déséquilibre Extrême : Nous avons confirmé un déséquilibre de classe extrême (Imbalanced Data). Le pourcentage de transactions frauduleuses (is_fraud = 1) est très faible (généralement moins de 0.2% du total).
+- Conséquence : L'évaluation du modèle doit impérativement se faire sur le F1-Score, car l'exactitude (Accuracy) serait trompeuse.
+
+###### Analyse des Variables Catégorielles (type)
+- Variables Clés : La variable type est l'un des prédicteurs les plus puissants.
+- Concentration de la Fraude : La fraude est quasi-exclusivement concentrée sur deux types de transactions:
+  - TRANSFER
+  - CASH_OUT
+Les types PAYMENT et DEBIT présentent un taux de fraude négligeable ou nul.
+
+###### Analyse Temporelle (step)
+En utilisant l'indice crucial que Step 1 est la première heure d'un LUNDI, nous avons créé deux nouvelles caractéristiques (features) :
+- hour (Heure de la journée) : L'analyse du taux de fraude par heure révèle que les transactions frauduleuses ne sont pas uniformes. Elles sont souvent concentrées sur des plages spécifiques, notamment les heures nocturnes (confirmant l'indice sur les "vols de comptes nocturnes" ) ou en dehors des heures de bureau.
+- day_of_week (Jour de la semaine) : Le taux de fraude présente des variations importantes selon le jour, ce qui peut indiquer des schémas d'attaque spécifiques à la semaine ou au week-end.
+
+###### Préparation des Données pour la Modélisation
+Le jeu de données a été préparé comme suit :
+- Suppression des identifiants (transaction_id, customer_id) et de la variable source (step).
+- Feature Engineering : Ajout des variables hour et day_of_week.
+- Encodage Catégoriel : Application du One-Hot Encoding aux variables type, hour et day_of_week pour les rendre utilisables par la Régression Logistique.

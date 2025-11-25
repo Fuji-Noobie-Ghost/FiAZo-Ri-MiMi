@@ -15,7 +15,7 @@
 * prénom(s) : Lala Minoniaina Joannah
 * classe : ESIIA 5
 * numéro : 09
-* rôle : *Conception du Readme.md*
+* rôle : *Rédaction du Readme.md*
 
 #### Membre 3 : 
 * nom : RAKOTONJANAHARY
@@ -64,7 +64,7 @@ Il est critique de résoudre ce problème pour les raisons suivantes :
 
 ###### Analyse de la Cible (is_fraud)
 - Déséquilibre Extrême : Nous avons confirmé un déséquilibre de classe extrême (Imbalanced Data). Le pourcentage de transactions frauduleuses (is_fraud = 1) est très faible (généralement moins de 0.2% du total).
-- Conséquence : L'évaluation du modèle doit impérativement se faire sur le F1-Score, car l'exactitude (Accuracy) serait trompeuse.
+L'évaluation du modèle doit impérativement se faire sur le F1-Score, car l'exactitude (Accuracy) serait trompeuse.
 
 ###### Analyse des Variables Catégorielles (type)
 - Variables Clés : La variable type est l'un des prédicteurs les plus puissants.

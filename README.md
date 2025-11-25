@@ -15,7 +15,7 @@
 * prénom(s) : Lala Minoniaina Joannah
 * classe : ESIIA 5
 * numéro : 09
-* rôle : *Rédaction du Readme.md*
+* rôle : *Rédaction du documentation*
 
 #### Membre 3 : 
 * nom : RAKOTONJANAHARY

@@ -93,3 +93,31 @@ Deux modèles sont comparés dans une stratégie de baseline vs. modèle avancé
 -	Concentration des Fraudes : Contrairement aux attentes typiques (où CASH_OUT et TRANSFER dominent), ici, la majorité écrasante des fraudes provient des TRANSFER (527 cas). Les autres types (PAYMENT, CASH_OUT, DEBIT) sont nettement moins fréquents.
 - Interprétation : Les fraudeurs exploitent principalement le mécanisme de transfert pour sortir l'argent ou le blanchir dans ce jeu de données particulier.
 
+
+### **4\. Réponses aux Questions d'Analyse**
+
+**Q1. Pourquoi on utilise F1-Score au lieu de accuracy ?**
+
+*On utilise le F1-Score au lieu de l'Exactitude (Accuracy), dans des problèmes comme la détection de fraude, à cause du déséquilibre de classe. Dans notre jeu de données, le taux de fraude (classe positive, '1') est de 1.9833%. Cela signifie que la classe négative (non-fraude, '0') représente 98.0167% des données.
+Accuracy est trompeuse et ne détecte aucune fraude.*
+
+**Q2. Qu'est ce qui est plus grave ici, les Faux Positifs ou les Faux Négatifs ?**
+
+*(Votre réponse ici)*
+
+**Q3. Stratégie de Modélisation : Quelles nouvelles variables (Feature Engineering) ont le plus amélioré votre modèle par rapport à la Baseline ?**
+
+*(Votre réponse ici)*
+
+**Q4. Enoncez tous les types de fraudes que vous avez décelé lors de votre analyse**
+
+* *(fraude1)*
+* *(fraude2)*
+* *(fraude3)*
+* *(...)*
+
+**Q5. Selon vous, quelle décision prendre si une transaction *en cours* est détectée comme *fraude* par le modèle ?**
+*(votre réponse ici)*
+
+### **5\. Bibliographie**
+*(si vous avez des livres, liens ou articles qui vous ont servi dans ce travail)*

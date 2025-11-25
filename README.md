@@ -15,14 +15,14 @@ Réalisé au sein de ISPM - Madagascar (www.ispm-edu.com)
 * prénom(s) : Lala Minoniaina Joannah
 * classe : ESIIA 5
 * numéro : 09
-* rôle : *Rédaction du documentation*
+* rôle : *Rédaction du document*
 
 #### Membre 3 : 
 * nom : RAKOTONJANAHARY
 * prénom(s) : Miora Irinah
 * classe : ESIIA 5
 * numéro : 10
-* rôle : *Préparation slide*
+* rôle : *Préparation de la vidéo*
 
 #### Membre 4 : 
 * nom : RATOVONARIVO

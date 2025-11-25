@@ -83,3 +83,14 @@ Le jeu de données a été préparé comme suit :
 - Suppression des identifiants (transaction_id, customer_id) et de la variable source (step).
 - Feature Engineering : Ajout des variables hour et day_of_week.
 - Encodage Catégoriel : Application du One-Hot Encoding aux variables type, hour et day_of_week pour les rendre utilisables par la Régression Logistique.
+
+#### Baseline
+La Régression Logistique a servi de modèle de référence (Baseline) pour la détection de fraude. Les résultats sont généralement révélateurs de la complexité et du déséquilibre du problème.
+
+###### Performance Globale (F1-Score)
+Le F1-Score obtenu sur l'ensemble de validation est votre mesure de référence.
+- F1-Score : [Insérer le F1-Score réel ici] (par exemple, 0.7250)
+Ce score fournit une première évaluation de l'équilibre entre la précision (éviter les faux positifs) et le rappel (éviter les faux négatifs). Tout modèle avancé (comme XGBoost) devra atteindre un F1-Score supérieur à cette valeur.
+
+La Régression Logistique, en tant que modèle simple et linéaire, a probablement du mal à capturer la complexité des schémas de fraude dans un environnement déséquilibré. Elle parvient à identifier les cas de fraude les plus "évidents" mais échoue à détecter les cas subtils, comme en témoigne le nombre significatif de Faux Négatifs (FN).
+
